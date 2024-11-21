@@ -110,67 +110,67 @@ VALUES
     
 
 
-select id, fullname 
-from student
-where fullname like "nguyen %";
+SELECT id, fullname 
+FROM student
+WHERE fullname LIKE "nguyen %";
 
-select id, fullname 
-from student
-where fullname like "% anh";
+SELECT id, fullname 
+FROM student
+WHERE fullname LIKE "% anh";
 
-select id, fullname, age
-from student
-where age between 18 and 25;
+SELECT id, fullname, age
+FROM student
+WHERE age BETWEEN 18 AND 25;
 
-select id, fullname
-from student
-where id in (12, 13);
+SELECT id, fullname
+FROM student
+WHERE id IN (12, 13);
 
 
 
-select  c.name as 'Class', count(s.id) as 'Number of students'
-from student s
-join class c on s.class_id = c.id
-group by c.id;
+SELECT  c.name AS 'Class', COUNT(s.id) AS 'Number of students'
+FROM student s
+JOIN class c ON s.class_id = c.id
+GROUP BY c.id;
 
-insert into Student (fullname, address_id, age, phone, class_id) values
+INSERT INTO Student (fullname, address_id, age, phone, class_id) VALUES
 	("Nguyen Duc Anh", 1, 30, '0333666999', 5);
 
-select substring(a.address,5) as Address, count(s.id) as 'Number of students'
-from student s
-join address a on s.address_id = a.id
-group by Address;
+SELECT SUBSTRING(a.address,5) AS Address, COUNT(s.id) AS 'Number of students'
+FROM student s
+JOIN address a ON s.address_id = a.id
+GROUP BY Address;
 
-select course.id, course.name, round(avg(point.point)) as AveragePoint
-from course
-left join point on course.id = point.course_id
-group by course.id;
+SELECT course.id, course.name, ROUND(AVG(point.point)) AS AveragePoint
+FROM course
+LEFT JOIN point ON course.id = point.course_id
+GROUP BY course.id;
 
-select max(point) as 'Highest point', min(point) as 'Lowest point' 
-from point;
+SELECT MAX(point) AS 'Highest point', MIN(point) AS 'Lowest point' 
+FROM point;
 
-select * 
-from student;
+SELECT * 
+FROM student;
 
-select ucase(fullname) from student;
+SELECT UCASE(fullname) FROM student;
 
-select course.id, course.name as CourseName, round(avg(point.point)) as AveragePoint
-from course
-left join point on course.id = point.course_id
-group by course.id
-having AveragePoint >= all(
-	select round(avg(point.point))
-    from course
-	join point on course.id = point.course_id	-- do not use left join at this line
-	group by course.id
+SELECT course.id, course.name AS CourseName, ROUND(AVG(point.point)) AS AveragePoint
+FROM course
+LEFT JOIN point ON course.id = point.course_id
+GROUP BY course.id
+HAVING AveragePoint >= ALL(
+	SELECT ROUND(AVG(point.point))
+    FROM course
+	JOIN point ON course.id = point.course_id	-- do not use left join at this line
+	GROUP BY course.id
 );
 
-select course.id, course.name as CourseName, round(avg(point.point)) as AveragePoint
-from course
-left join point on course.id = point.course_id
-group by course.id
-order by AveragePoint desc
-limit 1;
+SELECT course.id, course.name AS CourseName, ROUND(AVG(point.point)) AS AveragePoint
+FROM course
+LEFT JOIN point ON course.id = point.course_id
+GROUP BY course.id
+ORDER BY AveragePoint DESC
+LIMIT 1;
 
 
 
