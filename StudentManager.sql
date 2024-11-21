@@ -159,11 +159,12 @@ FROM course
 LEFT JOIN point ON course.id = point.course_id
 GROUP BY course.id
 HAVING AveragePoint >= ALL(
-	SELECT ROUND(AVG(point.point))
-    FROM course
-	JOIN point ON course.id = point.course_id	-- do not use left join at this line
-	GROUP BY course.id
+	SELECT ROUND(AVG(point))
+    FROM point
+	GROUP BY course_id
 );
+
+select * from point;
 
 SELECT course.id, course.name AS CourseName, ROUND(AVG(point.point)) AS AveragePoint
 FROM course
